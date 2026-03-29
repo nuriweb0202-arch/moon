@@ -1,0 +1,18 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:3000",
+  "executionArgs": {
+    "projectName": "캡스톤디자인 코딩",
+    "projectPath": "c:\\Users\\apple\\Desktop\\대학교\\4학년 1학기\\산업공학실무(캡스톤디자인)\\캡스톤디자인 코딩",
+    "testIds": [],
+    "additionalInstruction": "",
+    "serverMode": "development",
+    "envs": {
+      "API_KEY": "sk-user-hLrU-wazlnOe_ZxdybNMtWzCjGvVJi2HWPSskS4z-eWa2lC5A3pxz2WhMl_6fYjCCswnm4i3v2hHOnpYs7NmysfmHOoraKcdo9OQSd9jDgxgk4AY4Q2aIBqx8IzLaKKT5kw"
+    }
+  },
+  "serverPort": 7656,
+  "proxy": "http://ab7e3fe0-9e4a-4fd0-9dda-a8edf019162f:yl232wtnVAGusxijeVnkiEUcRrwezbJk@tun.testsprite.com:8080"
+}

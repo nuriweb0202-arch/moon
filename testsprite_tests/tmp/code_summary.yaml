@@ -1,0 +1,44 @@
+version: "2"
+type: frontend
+tech_stack:
+  - Vanilla JS
+  - HTML5
+  - CSS3
+  - Chart.js
+  - Firebase Firestore
+routes:
+  - path: /
+    file: public/index.html
+    auth_required: false
+    description: Main single page application for routing recommendations
+features:
+  - name: Get Route Recommendation
+    description: Take a quiz to get a customized travel route recommendation based on real data
+    files:
+      - public/index.html
+      - public/js/app.js
+    entry_route: /
+    user_interactions:
+      - Click '나머지 루트 완성하기' on home screen
+      - Select companion choice like '나홀로 뚜벅이 (1인)'
+      - Click '다음 단계로'
+      - Select time choice like '1~2시간'
+      - Click '다음 단계로'
+      - Select style choice like '미션 완수형'
+      - Click '분석 결과 보기' to submit
+      - View the matched timeline and percentage on Result Screen
+    api_calls:
+      - method: GET
+        endpoint: Firebase Firestore (routes collection)
+  - name: View Live Data Dashboard
+    description: View real-time Popular place rankings on home screen
+    files:
+      - public/index.html
+      - public/js/app.js
+    entry_route: /
+    user_interactions:
+      - Scroll down on home screen to see the donut chart and ranking list
+    api_calls:
+      - method: GET
+        endpoint: Firebase Firestore (routes collection)
+known_limitations: []

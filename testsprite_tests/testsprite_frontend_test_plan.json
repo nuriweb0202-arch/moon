@@ -1,0 +1,265 @@
+[
+  {
+    "id": "TC001",
+    "title": "Complete quiz and view route recommendation result",
+    "description": "Verifies a user can complete the full quiz flow and reach a result screen showing a timeline and percentage.",
+    "category": "Get Route Recommendation",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to start the route recommendation quiz"
+      },
+      {
+        "type": "action",
+        "description": "Select the companion choice 나홀로 뚜벅이 (1인)"
+      },
+      {
+        "type": "action",
+        "description": "Proceed to the next step"
+      },
+      {
+        "type": "action",
+        "description": "Select the time choice 1~2시간"
+      },
+      {
+        "type": "action",
+        "description": "Proceed to the next step"
+      },
+      {
+        "type": "action",
+        "description": "Select the style choice 미션 완수형"
+      },
+      {
+        "type": "action",
+        "description": "Submit the quiz to generate a recommendation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a matched travel timeline is displayed on the result screen"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a rounded percentage score is displayed on the result screen"
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "Block submission when quiz is incomplete",
+    "description": "Verifies the quiz cannot be submitted without making required selections and shows a validation state.",
+    "category": "Get Route Recommendation",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to start the route recommendation quiz"
+      },
+      {
+        "type": "action",
+        "description": "Proceed to the next step"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a selection validation error is visible and the flow does not advance"
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "Prevent duplicate rapid submissions of the quiz",
+    "description": "Verifies rapid repeated submissions are blocked so only one recommendation is processed.",
+    "category": "Get Route Recommendation",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to start the route recommendation quiz"
+      },
+      {
+        "type": "action",
+        "description": "Select any valid companion choice"
+      },
+      {
+        "type": "action",
+        "description": "Proceed to the next step"
+      },
+      {
+        "type": "action",
+        "description": "Select any valid time choice"
+      },
+      {
+        "type": "action",
+        "description": "Proceed to the next step"
+      },
+      {
+        "type": "action",
+        "description": "Select any valid style choice"
+      },
+      {
+        "type": "action",
+        "description": "Rapidly submit the quiz multiple times"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify only one recommendation result view is shown (no duplicated result sections or repeated loading states)"
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "Deterministic ordering when top places are tied",
+    "description": "Verifies the result ordering remains consistent on repeated submissions with the same selections, indicating deterministic tie resolution.",
+    "category": "Get Route Recommendation",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to start the route recommendation quiz"
+      },
+      {
+        "type": "action",
+        "description": "Make a consistent set of selections across all quiz steps"
+      },
+      {
+        "type": "action",
+        "description": "Submit the quiz to generate a recommendation"
+      },
+      {
+        "type": "action",
+        "description": "Record the first two place names shown in the recommendation result"
+      },
+      {
+        "type": "action",
+        "description": "Click the control to restart the quiz from the result view or return to the quiz start"
+      },
+      {
+        "type": "action",
+        "description": "Make the same selections again across all quiz steps"
+      },
+      {
+        "type": "action",
+        "description": "Submit the quiz to generate a recommendation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the first two place names in the result match the previously recorded order"
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "Live data dashboard displays donut chart and ranking list",
+    "description": "Verifies the home dashboard section renders popularity chart and rankings after scrolling.",
+    "category": "View Live Data Dashboard",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Scroll down on the home screen to the live data section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a donut chart is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a ranking list of popular places is displayed"
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "Live data dashboard remains stable after leaving and returning to home",
+    "description": "Verifies the donut chart is re-rendered cleanly without duplicated artifacts when navigating away and back.",
+    "category": "View Live Data Dashboard",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Scroll down on the home screen to the live data section"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to start the route recommendation quiz"
+      },
+      {
+        "type": "action",
+        "description": "Click the control to return to the home screen"
+      },
+      {
+        "type": "action",
+        "description": "Scroll down on the home screen to the live data section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify only one donut chart is displayed and the chart area shows no duplicated overlays or tooltips"
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "Repeated away-and-back navigation does not create duplicated chart instances",
+    "description": "Verifies repeated navigation cycles do not produce flicker or duplicated chart artifacts.",
+    "category": "View Live Data Dashboard",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Scroll down on the home screen to the live data section"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to start the route recommendation quiz"
+      },
+      {
+        "type": "action",
+        "description": "Click the control to return to the home screen"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to start the route recommendation quiz"
+      },
+      {
+        "type": "action",
+        "description": "Click the control to return to the home screen"
+      },
+      {
+        "type": "action",
+        "description": "Scroll down on the home screen to the live data section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the donut chart and ranking list appear once each without duplicated visual artifacts"
+      }
+    ]
+  }
+]
