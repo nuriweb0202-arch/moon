@@ -33,7 +33,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
             대전 중구 로컬 루트 큐레이션
           </div>
-          <h1 class="hero-title">단순한 장소 추천 대신,<br>사람들의 <span>진짜 경험</span>을 보세요</h1>
+          <h1 class="hero-title">단순한 장소 추천 대신,<br>사람들의 <span>진짜 경험</span>을 경험해보세요</h1>
           <p class="hero-subtitle">유사 사용자 데이터를 기반으로 대전 중구에서 가장 완벽한 동선을 제안하는 프리미엄 서비스입니다.</p>
         </header>
         
@@ -55,44 +55,8 @@
           </div>
 
           <div class="section-label">HOT PICK ROUTES</div>
-          <div class="horizontal-scroll-container">
-
-            <a href="https://map.naver.com/v5/search/%EC%84%B1%EC%8B%AC%EB%8B%B9%20%EB%8C%80%EC%A0%84" target="_blank" rel="noopener" class="route-card-mini route-card-link">
-              <span class="mini-badge">#커플</span>
-              <h4>성심당 → 감성카페</h4>
-              <p>MZ 세대 1위 코스</p>
-              <div class="route-card-footer">
-                <span class="naver-nav-btn">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
-                  네이버 지도 보기
-                </span>
-              </div>
-            </a>
-
-            <a href="https://map.naver.com/v5/search/%EB%8C%80%ED%9D%A5%EB%8F%99%20%EC%B9%B4%ED%8E%98%EA%B1%B0%EB%A6%AC%20%EB%8C%80%EC%A0%84" target="_blank" rel="noopener" class="route-card-mini route-card-link">
-              <span class="mini-badge">#혼자</span>
-              <h4>독립서점 → 산책로</h4>
-              <p>따뜻한 위로의 길</p>
-              <div class="route-card-footer">
-                <span class="naver-nav-btn">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
-                  네이버 지도 보기
-                </span>
-              </div>
-            </a>
-
-            <a href="https://map.naver.com/v5/search/%EB%8C%80%EC%A0%84%20%EC%A4%91%EC%95%99%EC%8B%9C%EC%9E%A5" target="_blank" rel="noopener" class="route-card-mini route-card-link">
-              <span class="mini-badge">#가족</span>
-              <h4>중앙시장 → 칼국수</h4>
-              <p>대전의 깊은 맛</p>
-              <div class="route-card-footer">
-                <span class="naver-nav-btn">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
-                  네이버 지도 보기
-                </span>
-              </div>
-            </a>
-
+          <div id="hot-picks-container" class="horizontal-scroll-container">
+            <div class="loading-placeholder" style="padding: 20px; color: var(--text-sub); font-size: 13px;">최신 인기 루트를 불러오는 중...</div>
           </div>
 
 
@@ -134,10 +98,33 @@
       <section class="screen" id="quiz-step-1">
         <nav class="top-nav">
           <button class="back-btn" onclick="app.navigateTo('home-screen')">←</button>
-          <span class="nav-title">맞춤형 루트 찾기</span>
+          <span class="nav-title">맞춤형 루트 찾기 (1/4)</span>
         </nav>
         <div class="quiz-container">
-          <div class="progress-bar"><div class="progress-fill" style="width: 33%"></div></div>
+          <div class="progress-bar"><div class="progress-fill" style="width: 25%"></div></div>
+          
+          <div style="margin-bottom:32px;">
+            <p class="sub-label">USER PROFILE</p>
+            <h2 class="quiz-title" style="margin-bottom:20px;">먼저 누구인지<br>알려주세요</h2>
+            
+            <div class="input-group" style="margin-bottom:20px;">
+              <label style="font-size:12px; font-weight:800; color:var(--text-sub); display:block; margin-bottom:10px;">연령대</label>
+              <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px;">
+                 <button class="chip-btn" onclick="app.setProfile('age', '20', this)">20대</button>
+                 <button class="chip-btn" onclick="app.setProfile('age', '30', this)">30대</button>
+                 <button class="chip-btn" onclick="app.setProfile('age', '40', this)">40대+</button>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label style="font-size:12px; font-weight:800; color:var(--text-sub); display:block; margin-bottom:10px;">성별</label>
+              <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:8px;">
+                 <button class="chip-btn" onclick="app.setProfile('gender', 'M', this)">남성</button>
+                 <button class="chip-btn" onclick="app.setProfile('gender', 'F', this)">여성</button>
+              </div>
+            </div>
+          </div>
+
           <p class="sub-label">QUESTION 01</p>
           <h2 class="quiz-title">오늘 누구와 중구를<br>함께 걷고 있나요?</h2>
           <div class="option-list" id="q1-options">
@@ -216,22 +203,22 @@
             <div class="quiz-option" onclick="app.selectOption('mood', 'mission', this)">
               <span class="option-emoji">🎯</span>
               <div class="option-text">
-                <strong class="option-main">미션 완수형</strong>
-                <p class="option-sub">유명한 곳은 다 가봐야 직성이 풀려요</p>
+                <strong class="option-main">랜드마크 정복형</strong>
+                <p class="option-sub">대전의 필수 명소들은 모두 가봐야 해요</p>
               </div>
             </div>
             <div class="quiz-option" onclick="app.selectOption('mood', 'sensitive', this)">
               <span class="option-emoji">📸</span>
               <div class="option-text">
-                <strong class="option-main">감성 기록형</strong>
-                <p class="option-sub">분위기 좋은 공간과 사진 기록이 중요해요</p>
+                <strong class="option-main">핫플레이스 탐방형</strong>
+                <p class="option-sub">SNS에서 난리 난 예쁜 공간이 중요해요</p>
               </div>
             </div>
             <div class="quiz-option" onclick="app.selectOption('mood', 'foodie', this)">
               <span class="option-emoji">🍽</span>
               <div class="option-text">
-                <strong class="option-main">로컬 식도락</strong>
-                <p class="option-sub">빵뿐만 아니라 대전만의 맛을 느끼고 싶어요</p>
+                <strong class="option-main">로컬 미식가형</strong>
+                <p class="option-sub">빵지순례부터 숨은 맛집까지 먹는 게 남는 것!</p>
               </div>
             </div>
           </div>
@@ -254,7 +241,7 @@
             <div class="skeleton-item"></div>
           </div>
           <h2 class="loading-title">유사 사용자 데이터 분석 중</h2>
-          <p class="loading-desc">당신과 가장 비슷한 824명의 데이터를 기반으로<br>현재 가장 트렌디한 길을 찾고 있습니다.</p>
+          <p class="loading-desc">당신과 가장 비슷한 <span id="loading-data-count">...</span>명의 데이터를 기반으로<br>현재 가장 트렌디한 길을 찾고 있습니다.</p>
         </div>
       </section>
 
@@ -289,9 +276,19 @@
           </div>
 
           <div class="score-section">
-            <div class="section-label">ROUTE ANALYSIS</div>
-            <div class="score-grid" id="score-grid">
-              <!-- JS 렌더링 영역 -->
+            <div class="section-label">ROUTE ANALYSIS REPORT (캡스톤 검증 데이터)</div>
+            <div style="background:var(--paper); padding:20px; border-radius:20px; border:1px solid var(--border); margin-bottom:20px;">
+                <h4 style="font-size:14px; font-weight:800; margin-bottom:12px;">📈 인자(Factor)별 추천 기여도 분석</h4>
+                <div style="height:180px; width:100%; margin-bottom:16px;">
+                    <canvas id="analysis-chart"></canvas>
+                </div>
+                <div class="score-grid" id="score-grid">
+                  <!-- JS 렌더링 영역 -->
+                </div>
+                <p style="font-size:11px; color:var(--text-sub); line-height:1.5; margin-top:10px;">
+                    * 본 결과는 단순 인기 순 정렬이 아닌, <strong>사용자 속성 가중치 모델(Condition-based Weighting)</strong>을 통해 도출되었습니다. 
+                    특정 조건(동행인, 테마)이 바뀌면 추천 순위가 실시간으로 재계산되어 개인화된 효용을 극대화합니다.
+                </p>
             </div>
           </div>
 
