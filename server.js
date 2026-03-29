@@ -31,8 +31,8 @@ app.get('/api/naver-search', (req, res) => {
     hostname: 'openapi.naver.com',
     path: `/v1/search/local.json?query=${encodeURIComponent(query)}&display=1`,
     headers: {
-      'X-Naver-Client-Id': '0hunwass8e',
-      'X-Naver-Client-Secret': 'rOPBmYd67luvmKDrIBcAcifq5D9dMBRay1vfmmdo'
+      'X-Naver-Client-Id': '9LG547ESL4qnI9JLVuzH',
+      'X-Naver-Client-Secret': 'KIRR2LjX2V'
     }
   };
 
@@ -65,8 +65,8 @@ app.get('/api/naver-search-list', (req, res) => {
     hostname: 'openapi.naver.com',
     path: `/v1/search/local.json?query=${encodeURIComponent(query + ' 대전')}&display=5`,
     headers: {
-      'X-Naver-Client-Id': '0hunwass8e',
-      'X-Naver-Client-Secret': 'rOPBmYd67luvmKDrIBcAcifq5D9dMBRay1vfmmdo'
+      'X-Naver-Client-Id': '9LG547ESL4qnI9JLVuzH',
+      'X-Naver-Client-Secret': 'KIRR2LjX2V'
     }
   };
 
@@ -101,14 +101,14 @@ app.get('/api/naver-blog-search', (req, res) => {
   const query = req.query.q;
   if (!query) return res.status(400).json({ error: 'Query is required' });
 
-  const display = req.query.display || 50;
+  const display = req.query.display || 100;
   const https = require('https');
   const options = {
     hostname: 'openapi.naver.com',
-    path: `/v1/search/blog.json?query=${encodeURIComponent(query)}&display=${display}`,
+    path: `/v1/search/blog.json?query=${encodeURIComponent(query)}&display=${display}&sort=sim`,
     headers: {
-      'X-Naver-Client-Id': '0hunwass8e',
-      'X-Naver-Client-Secret': 'rOPBmYd67luvmKDrIBcAcifq5D9dMBRay1vfmmdo'
+      'X-Naver-Client-Id': '9LG547ESL4qnI9JLVuzH',
+      'X-Naver-Client-Secret': 'KIRR2LjX2V'
     }
   };
 
@@ -116,6 +116,11 @@ app.get('/api/naver-blog-search', (req, res) => {
     let data = '';
     apiRes.on('data', (chunk) => data += chunk);
     apiRes.on('end', () => {
+      console.log(`[Naver Blog Search] Status: ${apiRes.statusCode}`);
+      if (apiRes.statusCode !== 200) {
+        console.error(`[Naver Blog Search] Error Data: ${data}`);
+        return res.status(apiRes.statusCode).json({ error: `Naver API Error: ${apiRes.statusCode}`, details: data });
+      }
       try {
         const result = JSON.parse(data);
         res.json(result.items || []);
@@ -124,6 +129,7 @@ app.get('/api/naver-blog-search', (req, res) => {
       }
     });
   }).on('error', (err) => {
+    console.error(`[Naver Blog Search] Request Error: ${err.message}`);
     res.status(500).json({ error: err.message });
   });
 });
